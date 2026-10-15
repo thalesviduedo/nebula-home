@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Obsidian Telemetry — valores hsl dos tokens do design system */
+    --background: 222 30% 8%; /* #0f131c */
+    --foreground: 229 33% 91%; /* #dfe2ef */
+
+    --card: 225 21% 12%; /* #181b25 */
+    --card-foreground: 229 33% 91%;
+
+    --popover: 226 19% 14%; /* #1c1f29 */
+    --popover-foreground: 229 33% 91%;
+
+    --primary: 188 90% 63%; /* #4cd7f6 */
+    --primary-foreground: 189 100% 11%; /* #003640 */
+
+    --secondary: 223 16% 18%; /* #262a34 */
+    --secondary-foreground: 229 33% 91%;
+
+    --muted: 226 19% 14%; /* #1c1f29 */
+    --muted-foreground: 194 15% 77%; /* #bcc9cd */
+
+    --accent: 223 12% 22%; /* #31353f */
+    --accent-foreground: 229 33% 94%;
+
+    --destructive: 6 100% 84%; /* #ffb4ab */
+    --destructive-foreground: 0 100% 21%; /* #690005 */
+
+    --border: 219 15% 20%;
+    --input: 219 14% 24%;
+    --ring: 188 90% 63%;
+
+    --radius: 0.5rem;
+
+    --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image:
+      radial-gradient(1100px 520px at 85% -10%, hsl(188 90% 63% / 0.07), transparent),
+      radial-gradient(900px 460px at 5% 110%, hsl(155 67% 55% / 0.05), transparent);
+    background-attachment: fixed;
+  }
+
+  /* números com spinner nativo são o pior lado de <input type=number> */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  /* matiz: precisa mostrar o arco-íris, senão o slider é inútil */
+  input[type="range"].hue {
+    background: linear-gradient(
+      to right,
+      hsl(0 100% 50%), hsl(60 100% 50%), hsl(120 100% 50%),
+      hsl(180 100% 50%), hsl(240 100% 50%), hsl(300 100% 50%), hsl(360 100% 50%)
+    );
+  }
+
+  /* range bonito e consistente */
+  input[type="range"] {
+    @apply h-1.5 w-full cursor-pointer appearance-none rounded-full bg-surface-container-highest;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    @apply size-4 rounded-full bg-primary shadow-[0_0_0_4px_hsl(var(--primary)/0.2)];
+    appearance: none;
+  }
+  input[type="range"]::-moz-range-thumb {
+    @apply size-4 rounded-full border-0 bg-primary shadow-[0_0_0_4px_hsl(var(--primary)/0.2)];
+  }
+  input[type="range"]:focus-visible::-webkit-slider-thumb {
+    @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply rounded-full bg-border; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-muted-foreground/40; }
+}
+
+@layer components {
+  .skel {
+    @apply rounded-2xl border border-outline-variant/40 bg-surface-container-low;
+    background-image: linear-gradient(
+      100deg,
+      hsl(var(--card) / 0.5) 40%,
+      hsl(var(--muted) / 0.8) 50%,
+      hsl(var(--card) / 0.5) 60%
+    );
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+
+  /* painel de vidro obsidiana: a base visual de quase tudo */
+  .nebu-panel {
+    @apply rounded-2xl border border-white/[0.06] bg-surface-container/70 backdrop-blur-md;
+  }
+
+  /* abas */
+  .nebu-tab {
+    @apply h-9 rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors
+           hover:text-foreground;
+  }
+  .nebu-tab[data-state="active"] {
+    @apply bg-primary/15 text-primary;
+  }
+
+  /* player em tela cheia: vídeo ocupa a tela mantendo o aspecto */
+  .nebu-player:fullscreen .nebu-frame {
+    @apply h-full w-full object-contain;
+  }
+
+  /* navegação lateral: sem barra de rolagem visível */
+  .nebu-nav::-webkit-scrollbar { display: none; }
+}
