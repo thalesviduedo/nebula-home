@@ -1,0 +1,33 @@
+# ============================================================================
+# Só `backend/`, `frontend/` e o README vão para o GitHub.
+# Descobertas (research/), dados pessoais (data/), scripts locais ficam de
+# fora por decisão do dono.
+# ============================================================================
+/*
+!/backend/
+!/frontend/
+!/.gitignore
+!/README.md
+!/LICENSE
+!/SECURITY.md
+!/.env.example
+
+# --- artefatos de build/execução (dentro de back/front) ---
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/*.tsbuildinfo
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/**/.pytest_cache/
+
+# binário compilado do terminal de câmera (o fonte Go é versionado)
+backend/tools/tuya-ipc-terminal/tuya-ipc-terminal
+backend/tools/tuya-ipc-terminal/bin/
+
+# --- segredos/estado pessoal (nunca versionar, em qualquer nível) ---
+*.localKey
+.tuya-data/
+data/
+research/
+scripts/
