@@ -1,0 +1,6 @@
+# Backend Nebula Home (API local sem estado)
+tinytuya
+pyav
+requests
+cryptography
+numpy

@@ -1,0 +1,8 @@
+# runtime/teste — nunca versionar (o root .gitignore pode ser reescrito)
+__pycache__/
+*.pyc
+.pytest_cache/
+.tuya-data/
+*.log
+.env
+.env.local
